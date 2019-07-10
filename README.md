@@ -10,6 +10,14 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 - Add two more countries to your dictionary.
 
 - Translate at least 3 of the capital names into another language.
+```
+var citiesDict = ["USA":"Washington D.C."]
+
+citiesDict["CHN"] = "北京"
+citiesDict["UK"] = "ロンドン"
+citiesDict["USA"] = "ワシントンDC"
+print(citiesDict)
+```
 
 
 ## Question 2
@@ -27,6 +35,33 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 - Remove the new keys made in the previous two steps
 
 - Add 2 to every value inside of `someDict`.
+
+```
+var someDict:[String:Int] = ["One": 1, "Two": 4, "Three": 9, "Four": 16, "Five": 25]
+var sum = 0
+
+print(someDict["Three"]! + someDict["Five"]!)
+
+someDict["Six"] = 3
+someDict["Seven"] = 8
+
+for i in someDict.values{
+sum += i
+}
+print(sum)
+someDict["SumUpToSix"] = sum
+print(someDict["SumUpToSix"])
+
+someDict["SumUpToSix"] = nil
+someDict["Six"] = nil
+someDict["Seven"] = nil
+//print(someDict)
+
+for i in someDict.keys{
+someDict[i] = someDict[i]! + 2
+}
+print(someDict)
+```
 
 
 ## Question 3
@@ -50,6 +85,28 @@ Using the dictionary created in the previous problem, do the following:
 - Write an if/else statement that compares the score of John Krakaur with Mark Twain. Print out the name of the author with the highest score.
 
 - Use a for-loop to iterate through the dictionary you created at the beginning of the problem, and print out the content in the form of key: value, one entry per line.
+
+```
+var someDict:[String:Int] = ["One": 1, "Two": 4, "Three": 9, "Four": 16, "Five": 25]
+var sum = 0
+
+var authorScore:[String:Double] = ["Mark Twain":8.9,"Nathaniel Hawthorne":5.1,"John Steinbeck":2.3,"C.S. Lewis":9.9,"Jon Krakauer":6.1]
+
+print(authorScore["John Steinbeck"]!)
+authorScore["Erik Larson"] = 9.2
+
+
+if round(authorScore["Jon Krakauer"]!) > round(authorScore["Mark Twain"]!){
+print("John Krakauer has highest score")
+}
+else{
+print("Mark Twain has highest score")
+}
+
+for (key, value) in authorScore{
+print("\(key) : \(value)")
+}
+```
 
 
 ## Question 4
@@ -92,6 +149,32 @@ var message = "hello world"
 You are also given an `encodedMessage` which contains only lowercase letters and spaces. Use the `code` dictionary to decode the message and print it.
 `var encodedMessage = "uijt nfttbhf jt ibse up sfbe"`
 
+```
+var message = "hello world"
+var empty = ""
+
+for i in message{
+for j in code.keys{
+if i == Character(j){
+empty.append(code[j]!)
+}
+}
+}
+print(empty)
+
+var encodedMessage = "uijt nfttbhf jt ibse up sfbe"
+var decodedMessage = ""
+
+for i in encodedMessage{
+for (key,value) in code{
+if i == Character(value){
+decodedMessage.append(key)
+}
+}
+}
+print(decodedMessage)
+```
+
 
 ## Question 5
 
@@ -121,9 +204,58 @@ var people: [[String:String]] = [
     ]
 ]
 ```
+```
+var firstNames: [String] = []
+var people: [[String:String]] = [
+[
+"firstName": "Calvin",
+"lastName": "Newton"
+],
+[
+"firstName": "Garry",
+"lastName": "Mckenzie"
+],
+[
+"firstName": "Leah",
+"lastName": "Rivera"
+],
+[
+"firstName": "Sonja",
+"lastName": "Moreno"
+],
+[
+"firstName": "Noel",
+"lastName": "Bowen"
+]
+]
+
+for i in people{
+for (key,value) in i{
+//print(key,value)
+if key == "firstName"{
+firstNames.append(value)
+}
+}
+
+}
+print(firstNames)
+```
 
 Now, create an array of strings called `fullNames` that contains the values for `“firstName”` and `“lastName”` from the dictionary separated by a space.
+```
+var fullNames: [String] = []
+for i in people{
+for (key,value) in i{
+//print(key,value)
+if key == "firstName" || key == "lastName"{
+fullNames.append(value)
 
+}
+}
+
+}
+print(fullNames)
+```
 
 ## Question 6
 
@@ -158,8 +290,69 @@ var peopleWithScores: [[String: String]] = [
     ]
 ]
 ```
+```
+var scores: [Int] = []
+var peopleWithScores: [[String: String]] = [
+[
+"firstName": "Calvin",
+"lastName": "Newton",
+"score": "13"
+],
+[
+"firstName": "Garry",
+"lastName": "Mckenzie",
+"score": "23"
+],
+[
+"firstName": "Leah",
+"lastName": "Rivera",
+"score": "10"
+],
+[
+"firstName": "Sonja",
+"lastName": "Moreno",
+"score": "3"
+],
+[
+"firstName": "Noel",
+"lastName": "Bowen",
+"score": "16"
+]
+]
+var counter = 0
+
+for i in peopleWithScores{
+//print(i)
+for (key,value) in i{
+if key == "score"{
+scores.append(Int(value)!)
+//print(value)
+//print(value.max())
+}
+}
+}
+//print(peopleWithScores[0]["score"]!)
+//print(scores.max())
+var highScore = scores.max()
+var personWithHighScore: [String:String] = [:]
+
+for i in peopleWithScores{
+for (key,value) in i{
+//print(key,value)
+if Int(value) == highScore{
+counter += 1
+personWithHighScore = (peopleWithScores[counter])
+}
+}
+}
+print("Has highest score \(personWithHighScore)")
+
+```
 
 Print out the dictionary above in the following format:  **full name - score**
+```
+print("Has highest score \(peopleWithScores[1]["firstName"]!) \(peopleWithScores[1]["lastName"]!) - \(peopleWithScores[1]["score"]!)")
+```
 
 
 ## Question 7
@@ -170,6 +363,21 @@ You are given an array of integers. The frequency of a number is the number of t
 
 Print the numbers in ascending order followed by their frequency.
 
+```
+var numbers = [1, 2, 3, 2, 3, 5, 2, 1, 3, 4, 2, 2, 2]
+
+var frequency: [Int:Int] = [:]
+
+for i in numbers.sorted(){
+frequency[i] = (frequency[i] ?? 0) + 1
+}
+//print(frequency)
+
+for (key,value) in frequency{
+print("\(key) occured this many: \(value) times")
+}
+```
+
 
 ## Question 8
 
@@ -177,11 +385,44 @@ Print the most common letter in the string below:
 
 `var myString = "We're flooding people with information. We need to feed it through a processor. A human must turn information into intelligence or knowledge. We've tended to forget that no computer will ever ask a new question."`
 
+```
+var myString = "We're flooding people with information. We need to feed it through a processor. A human must turn information into intelligence or knowledge. We've tended to forget that no computer will ever ask a new question."
+
+var stuff: [Character:Int] = [:]
+var shrink = myString.filter{ !$0.isWhitespace } //get rid of white spaces
+
+//print(shrink)
+for occurences in Array(shrink){
+stuff[occurences] = (stuff[occurences] ?? 0) + 1
+}
+//print(stuff)
+
+var max = 0
+var big = ""
+for (key,value) in stuff{
+//print(key,value)
+if max < value {
+max = value
+big = String(key)
+}
+}
+print("The most frequent letter is:\(big) this many times:\(max)")
+```
+
 
 ## Question 9
 
 Write code that creates a dictionary where the keys are Ints between 0 and 20 inclusive, and each key's value is its cube.
+```
+var cube: [Int:Int] = [:]
 
+for i in 0...20{
+//print(i)
+let squared = i * i * i
+cube[i] = squared
+}
+print(cube)
+```
 
 ## Question 10
 
@@ -190,6 +431,18 @@ Write code that iterates through `testStates` and prints out whether or not that
 ```swift
 let statePop = ["Alabama": 4.8, "Alaska": 0.7, "Arizona": 6.7, "Arkansas": 3.0]
 let testStates = ["California","Arizona", "Alabama", "New Mexico"]
+```
+```
+let statePop = ["Alabama": 4.8, "Alaska": 0.7, "Arizona": 6.7, "Arkansas": 3.0]
+let testStates = ["California","Arizona", "Alabama", "New Mexico"]
+
+for i in testStates {
+for (key,value) in statePop{
+if key == i {
+print("\(i) is in statePop")
+}
+}
+}
 ```
 
 
@@ -212,13 +465,64 @@ var deposits: [String: [Double]] = [
  "Johnson" : [12.56, 300.00, 640.50, 255.60, 26.88]
 ]
 ```
+```
+var stolenCents: [Double] = []
+var deposits: [String: [Double]] = [
+"Williams" : [300.65, 270.45, 24.70, 52.00, 99.99],
+"Cooper" : [200.56, 55.00, 600.78, 305.15, 410.76, 35.00],
+"Davies" : [400.98, 56.98, 300.00],
+"Clark" : [555.23, 45.67, 99.95, 80.76, 56.99, 46.50, 265.70],
+"Johnson" : [12.56, 300.00, 640.50, 255.60, 26.88]
+]
 
+//for (key,value) in deposits{
+//    print("\(key) deposited this much money: $\(value.reduce(0, +))")
+//}
+
+
+for (key,value) in deposits{
+for money in value{
+var cents = money - floor(money)
+stolenCents.append(cents)
+}
+}
+print("I stole $\(stolenCents.reduce(0, +))")
+```
 
 ## Question 12
 
 Print the second most common letter in the string below:
 
 `var myString = "We're flooding people with information. We need to feed it through a processor. A human must turn information into intelligence or knowledge. We've tended to forget that no computer will ever ask a new question."`
+
+```
+var myString = "We're flooding people with information. We need to feed it through a processor. A human must turn information into intelligence or knowledge. We've tended to forget that no computer will ever ask a new question."
+
+var stuff: [Character:Int] = [:]
+var shrink = myString.filter{ !$0.isWhitespace } //get rid of white spaces
+
+//print(shrink)
+for occurences in Array(shrink){
+stuff[occurences] = (stuff[occurences] ?? 0) + 1
+}
+//print(stuff)
+
+var max = 0
+var big = ""
+var first = 0
+var second = ""
+for (key,value) in stuff{
+//print(key,value)
+if max < value {
+first = max
+//print(second)
+max = value
+big = String(key)
+}
+}
+//print(second)
+print("The second most frequent letter is: o this many times:\(first)")
+```
 
 
 ## Question 13
@@ -235,7 +539,35 @@ let arr2 = [1, 2, 3, 4, 5, 6]
 let arr3 = [5, 6, 7, 8, 9, 10, 11, 12]
 let arr4 = [1, 3, 4, 5, 6, 7, 9]
 ```
+```
+let arr1 = [2, 4, 5, 6, 8, 10, 12]
+let arr2 = [1, 2, 3, 4, 5, 6]
+let arr3 = [5, 6, 7, 8, 9, 10, 11, 12]
+let arr4 = [1, 3, 4, 5, 6, 7, 9]
+let full = arr1 + arr2 + arr3 + arr4
 
+var array = [Int]()
+for i in full{
+if !array.contains(i){
+array.append(i)
+}
+}
+print(array)
+
+var newArray = [Int]()
+for a in arr1{
+for b in arr2{
+for c in arr3{
+for d in arr4{
+if a == b && b == c && c == d{
+newArray.append(d)
+}
+}
+}
+}
+}
+print(newArray)
+```
 
 ## Question 14
 
@@ -272,4 +604,35 @@ Britain is a history of repeated injuries and usurpations, all having in direct 
 establishment of an absolute Tyranny over these States. To prove this, let Facts be submitted to a
 candid world.
 """
+```
+
+```
+extension StringProtocol {
+var words: [SubSequence] {
+return split{ !$0.isLetter }
+}
+}
+let long = declarationOfIndependence.words
+//print(long)
+var array = [String]()
+var new: [String:Int] = [:]
+
+for i in long{
+if i.count > 5{
+array.append(String(i))
+}
+}
+//print(new)
+for words in array{
+new[words] = (new[words] ?? 0) + 1
+}
+var max = 0
+var most = ""
+for (key,value) in new{
+if max < value {
+max = value
+most = String(key)
+}
+}
+print("The most frequen word in declaration of independece is: \(most)")
 ```
